@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/3.8.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/3.8.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/3.8.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/3.8.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/3.8.0/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+  </head>
+  <body>
+
+    <div id="app">
+      <form>
+        <input>
+      </form>
+
+      <ul>
+        <li v-for="message in messages">{{ message.text }} <a href="#" v-on:click="deleteMessage(message)">[x]</a></li>
+      </ul>
+    </div>
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        let db = firebase.database();
+
+        let app = new Vue({
+          el: '#app',
+          data: {
+            messages: []
+          },
+          methods: {
+            deleteMessage: function(message) {
+              this.messages.indexOf(message);
+              db.ref(`/messages/${message.key}`).remove();
+            }
+          }
+        });
+
+        let messageListRef = db.ref('/messages');
+        messageListRef.on('child_added', (dataSnapshot) => {
+          let message = Object.assign({key: dataSnapshot.key}, dataSnapshot.val());
+          app.messages.push(message);
+        });
+
+        messageListRef.on('child_removed', (dataSnapshot) => {
+          app.messages.forEach( (message, index) => {
+            if (message.key == dataSnapshot.key) {
+              app.messages.splice(index, 1);
+            }
+          })
+        });
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          let $input = document.querySelector('form input');
+          let text = $input.value.trim();
+          $input.value = '';
+
+          messageListRef.push({text});
+        });
+
+      });
+    </script>
+  </body>
+</html>

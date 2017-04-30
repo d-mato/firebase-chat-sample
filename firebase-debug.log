@@ -1,0 +1,27 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/node /home/daiki/node_modules/.bin/firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     linux
+[debug] Node Version: v7.5.0
+[debug] Time:         Sun Apr 23 2017 09:52:33 GMT+0900 (JST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/chat-sample-3dbe9  
+ Sun Apr 23 2017 09:52:33 GMT+0900 (JST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/chat-sample-3dbe9/tokens  
+ Sun Apr 23 2017 09:52:34 GMT+0900 (JST)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /home/daiki/Projects/firebase-chat-sample
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/chat-sample-3dbe9  
+ Sun Apr 23 2017 09:52:35 GMT+0900 (JST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/453383177918/clients/_:getWebAppConfig  
+ Sun Apr 23 2017 09:52:36 GMT+0900 (JST)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:5000
